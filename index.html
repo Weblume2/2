@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CJ Plumbers and Construction | Pietermaritzburg</title>
+    <meta name="description" content="Professional Plumbing & Construction Services in Pietermaritzburg. 24/7 Emergency Services, Renovations, and Maintenance.">
+    
+    <!-- Google Fonts: Montserrat & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for standalone functionality) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a', // Slate 900
+                        secondary: '#334155', // Slate 700
+                        accent: '#d97706', // Amber 600 (Goldish)
+                        accentHover: '#b45309',
+                        darkBg: '#020617',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Custom Styles for things Tailwind handles differently */
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-overlay {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7));
+        }
+        /* Mobile Sticky Button Animation */
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(217, 119, 6, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+        }
+        .pulse-btn {
+            animation: pulse-gold 2s infinite;
+        }
+        
+        /* UPDATED: Masonry Grid for Mobile (2 cols) and Desktop (3 cols) */
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+
+        /* Hide scrollbar for horizontal scrolling sections */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body text-slate-700 dark:text-slate-300 bg-gray-50 dark:bg-darkBg transition-colors duration-300">
+
+    <!-- Emergency Top Banner -->
+    <div class="bg-accent text-white py-2 px-4 text-center text-xs md:text-sm font-medium font-heading tracking-wide">
+        <i class="fa-solid fa-bell mr-2 animate-bounce"></i> 24/7 Emergency Services Available
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="absolute w-full z-50 transition-all duration-300 glass-nav border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-xl md:text-2xl font-heading font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-helmet-safety text-accent"></i>
+                CJ <span class="text-accent">PLUMBERS</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-accent transition font-medium">Home</a>
+                <a href="#about" class="text-white hover:text-accent transition font-medium">About</a>
+                <a href="#services" class="text-white hover:text-accent transition font-medium">Services</a>
+                <a href="#projects" class="text-white hover:text-accent transition font-medium">Projects</a>
+                <a href="#contact" class="text-white hover:text-accent transition font-medium">Contact</a>
+                
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="text-white hover:text-accent transition p-2 rounded-full border border-white/20">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="#contact" class="bg-accent hover:bg-accentHover text-white px-6 py-2 rounded-full font-bold transition transform hover:scale-105 shadow-lg">
+                    Get Quote
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center gap-4">
+                 <button id="mobile-theme-toggle" class="text-white">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobile-menu-btn" class="text-white text-2xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-primary border-t border-white/10 absolute w-full">
+            <div class="flex flex-col px-6 py-4 space-y-4">
+                <a href="#home" class="text-white hover:text-accent block">Home</a>
+                <a href="#about" class="text-white hover:text-accent block">About</a>
+                <a href="#services" class="text-white hover:text-accent block">Services</a>
+                <a href="#projects" class="text-white hover:text-accent block">Projects</a>
+                <a href="#contact" class="text-white hover:text-accent block">Contact</a>
+                <a href="#contact" class="bg-accent text-center text-white px-6 py-3 rounded font-bold block">Get Free Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-fixed">
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center md:text-left pt-20">
+            <div class="max-w-3xl mx-auto md:mx-0">
+                <div class="inline-block bg-accent/20 border border-accent/40 rounded-full px-4 py-1 mb-6 backdrop-blur-sm" data-aos="fade-down">
+                    <span class="text-accent font-bold text-xs md:text-sm tracking-wider uppercase">⭐ #1 Rated in Pietermaritzburg</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-tight mb-6" data-aos="fade-up" data-aos-delay="100">
+                    Building Trust. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-300">Fixing Problems.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-300 mb-8 font-light" data-aos="fade-up" data-aos-delay="200">
+                    Professional plumbing and construction services in Sweetwaters & surrounding areas.
+                </p>
+                
+                <!-- Buttons updated to be side-by-side on mobile if possible -->
+                <div class="flex flex-row gap-3 justify-center md:justify-start" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#contact" class="flex-1 md:flex-none bg-accent hover:bg-accentHover text-white px-4 md:px-8 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl text-center text-sm md:text-base">
+                        Get Quote
+                    </a>
+                    <a href="tel:+27000000000" class="flex-1 md:flex-none bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 md:px-8 py-4 rounded-full font-bold transition text-center flex items-center justify-center gap-2 text-sm md:text-base">
+                        <i class="fa-solid fa-phone"></i> Call Now
+                    </a>
+                </div>
+                
+                <!-- Trust Badges -->
+                <div class="mt-12 flex flex-wrap justify-center md:justify-start gap-4 text-white/80 text-sm" data-aos="fade-in" data-aos-delay="500">
+                    <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-star text-accent"></i>
+                        <span class="font-medium">5.0 Star Rated</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-clock text-accent"></i>
+                        <span class="font-medium">24/7 Response</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-shield-halved text-accent"></i>
+                        <span class="font-medium">Insured</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white dark:bg-primary -mt-10 relative z-20 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+        <div class="container mx-auto px-6">
+            <!-- Updated grid to be 2 cols on mobile (gap-4) instead of 1 stack -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                <!-- Box 1 -->
+                <div class="bg-gray-50 dark:bg-secondary p-4 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-accent text-center group" data-aos="fade-up">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-accent transition">
+                        <i class="fa-solid fa-clock text-lg md:text-2xl text-accent group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-sm md:text-xl font-bold font-heading mb-1 md:mb-2 dark:text-white">24 Hour Service</h3>
+                    <p class="text-xs md:text-sm text-gray-500 dark:text-gray-300">Available day or night.</p>
+                </div>
+                <!-- Box 2 -->
+                <div class="bg-gray-50 dark:bg-secondary p-4 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-accent text-center group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-accent transition">
+                        <i class="fa-solid fa-user-hard-hat text-lg md:text-2xl text-accent group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-sm md:text-xl font-bold font-heading mb-1 md:mb-2 dark:text-white">Experienced</h3>
+                    <p class="text-xs md:text-sm text-gray-500 dark:text-gray-300">Qualified team.</p>
+                </div>
+                <!-- Box 3 -->
+                <div class="bg-gray-50 dark:bg-secondary p-4 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-accent text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-accent transition">
+                        <i class="fa-solid fa-bolt text-lg md:text-2xl text-accent group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-sm md:text-xl font-bold font-heading mb-1 md:mb-2 dark:text-white">Fast Response</h3>
+                    <p class="text-xs md:text-sm text-gray-500 dark:text-gray-300">We arrive on time.</p>
+                </div>
+                <!-- Box 4 -->
+                <div class="bg-gray-50 dark:bg-secondary p-4 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-accent text-center group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-accent transition">
+                        <i class="fa-solid fa-tag text-lg md:text-2xl text-accent group-hover:text-white transition"></i>
+                    </div>
+                    <h3 class="text-sm md:text-xl font-bold font-heading mb-1 md:mb-2 dark:text-white">Fair Pricing</h3>
+                    <p class="text-xs md:text-sm text-gray-500 dark:text-gray-300">No hidden costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-darkBg">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop" alt="CJ Plumbers Team" class="rounded-lg shadow-2xl z-10 relative">
+                        <!-- Decorative border -->
+                        <div class="absolute -bottom-6 -right-6 w-full h-full border-4 border-accent rounded-lg -z-0 hidden md:block"></div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <h4 class="text-accent font-bold uppercase tracking-wider mb-2">About Our Company</h4>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary dark:text-white mb-6">Building Excellence in Pietermaritzburg</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        At <span class="font-bold text-accent">CJ Plumbers and Construction</span>, we are a trusted local company committed to quality workmanship. Located in Sweetwaters, we serve the entire Pietermaritzburg community.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-accent"></i>
+                            <span class="dark:text-white font-medium text-sm">Integrity</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-accent"></i>
+                            <span class="dark:text-white font-medium text-sm">Quality Work</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-accent"></i>
+                            <span class="dark:text-white font-medium text-sm">Satisfaction</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle text-accent"></i>
+                            <span class="dark:text-white font-medium text-sm">Reliability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white dark:bg-primary overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h4 class="text-accent font-bold uppercase tracking-wider mb-2">What We Do</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary dark:text-white">Our Services</h2>
+                <div class="w-20 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- UPDATED: Horizontal Scroll on Mobile, Grid on Desktop -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-8 no-scrollbar pb-6" data-aos="fade-up">
+                
+                <!-- Service 1 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Plumbing">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Emergency Plumbing</h3>
+                            <i class="fa-solid fa-faucet-drip text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Burst pipes, blocked drains, and leak detection available 24/7.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Construction">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Building Construction</h3>
+                            <i class="fa-solid fa-trowel-bricks text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">From foundations to bricklaying, we build structures that last.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Bathroom">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Bathroom Renovations</h3>
+                            <i class="fa-solid fa-bath text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Modernizing bathrooms with premium fixtures and tiling.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1517646287309-48b98e0b9e44?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Geyser">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Geyser Installation</h3>
+                            <i class="fa-solid fa-fire-burner text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Installation, repairs, and maintenance of solar and electric geysers.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Electric">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Maintenance & Repairs</h3>
+                            <i class="fa-solid fa-screwdriver-wrench text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">General home maintenance, waterproofing, and structural repairs.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                 <!-- Service 6 -->
+                 <div class="min-w-[85vw] md:min-w-0 snap-center bg-gray-50 dark:bg-secondary rounded-xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Concrete">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold font-heading dark:text-white">Concrete Work</h3>
+                            <i class="fa-solid fa-road text-accent text-2xl"></i>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Driveways, slabs, and concrete flooring for residential or commercial use.</p>
+                        <a href="#contact" class="text-accent font-bold text-sm uppercase tracking-wide hover:text-accentHover">Get Quote <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Swipe Hint -->
+            <div class="md:hidden text-center text-gray-400 text-xs mt-2 animate-pulse">
+                <i class="fa-solid fa-arrow-left"></i> Swipe to see more <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery (Masonry) -->
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-darkBg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h4 class="text-accent font-bold uppercase tracking-wider mb-2">Our Work</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary dark:text-white">Recent Projects</h2>
+                <div class="w-20 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- CSS updated in <style> to be 2-column on mobile -->
+            <div class="masonry-grid" data-aos="fade-up">
+                <!-- Item 1 -->
+                <div class="masonry-item relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop" class="w-full h-auto transform group-hover:scale-110 transition duration-700" alt="Project 1">
+                    <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4">
+                        <div class="hidden md:block">
+                            <h4 class="text-white font-bold text-xl">Modern Bathroom</h4>
+                            <p class="text-accent text-sm">Renovation</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Item 2 -->
+                 <div class="masonry-item relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop" class="w-full h-auto transform group-hover:scale-110 transition duration-700" alt="Project 2">
+                     <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4">
+                        <div class="hidden md:block">
+                            <h4 class="text-white font-bold text-xl">Site Construction</h4>
+                            <p class="text-accent text-sm">Building</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Item 3 -->
+                 <div class="masonry-item relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=2000&auto=format&fit=crop" class="w-full h-auto transform group-hover:scale-110 transition duration-700" alt="Project 3">
+                     <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4">
+                        <div class="hidden md:block">
+                            <h4 class="text-white font-bold text-xl">Piping System</h4>
+                            <p class="text-accent text-sm">Plumbing</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Item 4 -->
+                 <div class="masonry-item relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" class="w-full h-auto transform group-hover:scale-110 transition duration-700" alt="Project 4">
+                     <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4">
+                        <div class="hidden md:block">
+                            <h4 class="text-white font-bold text-xl">Concrete Foundation</h4>
+                            <p class="text-accent text-sm">Construction</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Item 5 -->
+                 <div class="masonry-item relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=2000&auto=format&fit=crop" class="w-full h-auto transform group-hover:scale-110 transition duration-700" alt="Project 5">
+                     <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-center p-4">
+                        <div class="hidden md:block">
+                            <h4 class="text-white font-bold text-xl">Kitchen Upgrade</h4>
+                            <p class="text-accent text-sm">Renovation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-primary relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <i class="fa-solid fa-quote-right text-9xl text-white absolute top-10 right-10"></i>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h4 class="text-accent font-bold uppercase tracking-wider mb-2">Testimonials</h4>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">Happy Clients</h2>
+            </div>
+
+            <!-- UPDATED: Horizontal Scroll on Mobile -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 md:grid md:grid-cols-3 md:gap-8 no-scrollbar pb-6">
+                <!-- Review 1 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/10" data-aos="fade-up">
+                    <div class="text-accent mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Professional and reliable service provided by their team. They hit the spot. Fixed my burst pipe at 2am without hassle."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold">ZM</div>
+                        <div>
+                            <h5 class="text-white font-bold">Zinhle Molefe</h5>
+                            <p class="text-sm text-gray-400">Sweetwaters</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="100">
+                     <div class="text-accent mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Excellent workmanship on our boundary wall. The team was fast, clean, and the pricing was very reasonable."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold">TN</div>
+                        <div>
+                            <h5 class="text-white font-bold">Thabo Ndlovu</h5>
+                            <p class="text-sm text-gray-400">Pietermaritzburg</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Review 3 -->
+                 <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/10 backdrop-blur-md p-8 rounded-xl border border-white/10" data-aos="fade-up" data-aos-delay="200">
+                     <div class="text-accent mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"CJ Plumbers is the only company I call. They are honest, trustworthy, and do exactly what they promise."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold">SP</div>
+                        <div>
+                            <h5 class="text-white font-bold">Sarah Pillay</h5>
+                            <p class="text-sm text-gray-400">Northdale</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Mobile Swipe Hint -->
+             <div class="md:hidden text-center text-gray-400 text-xs mt-2 animate-pulse">
+                <i class="fa-solid fa-arrow-left"></i> Swipe to see reviews <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white dark:bg-primary">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-heading font-bold text-primary dark:text-white">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-4 bg-gray-50 dark:bg-secondary flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-primary dark:text-white text-sm md:text-base">Do you offer 24/7 emergency services?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white dark:bg-darkBg text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                        Yes! We have a dedicated team on standby 24 hours a day, 7 days a week for all plumbing and construction emergencies in Pietermaritzburg.
+                    </div>
+                </div>
+                 <!-- FAQ Item 2 -->
+                 <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-4 bg-gray-50 dark:bg-secondary flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-primary dark:text-white text-sm md:text-base">Do you charge for quotes?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white dark:bg-darkBg text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                        No, we provide free, no-obligation quotes for all our services. Contact us today to schedule an assessment.
+                    </div>
+                </div>
+                 <!-- FAQ Item 3 -->
+                 <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-4 bg-gray-50 dark:bg-secondary flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-primary dark:text-white text-sm md:text-base">What areas do you serve?</span>
+                        <i class="fa-solid fa-chevron-down text-accent transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white dark:bg-darkBg text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                        We are based in Sweetwaters but serve the entire Pietermaritzburg area and surrounding suburbs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action Banner -->
+    <section class="py-16 bg-gradient-to-r from-primary to-slate-800 border-y border-white/10">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-6">Need Plumbing or Construction Help Today?</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-sm md:text-base">Don't let a small leak turn into a big problem. Contact our professional team for immediate assistance.</p>
+            <a href="#contact" class="inline-block bg-accent hover:bg-accentHover text-white text-lg px-10 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl pulse-btn">
+                Request a Free Quote
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-darkBg">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <h4 class="text-accent font-bold uppercase tracking-wider mb-2">Get In Touch</h4>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-primary dark:text-white mb-6">Contact Us</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">
+                        Fill out the form or contact us directly using the details below. We are ready to assist you.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-primary dark:text-white font-bold text-lg">Our Location</h5>
+                                <p class="text-gray-600 dark:text-gray-400">1803 Mnkangala Area, Sweetwaters<br>Pietermaritzburg, 3201</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-primary dark:text-white font-bold text-lg">Phone Number</h5>
+                                <p class="text-gray-600 dark:text-gray-400">+27 00 000 0000</p>
+                                <p class="text-accent text-sm font-bold mt-1">Available 24/7</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-envelope text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-primary dark:text-white font-bold text-lg">Email Address</h5>
+                                <p class="text-gray-600 dark:text-gray-400">info@cjplumbers.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Embed -->
+                    <div class="mt-8 rounded-xl overflow-hidden shadow-lg h-64 border-4 border-white dark:border-secondary">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110550.41836653995!2d30.297672957106096!3d-29.600965155998184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef5bb8a4d742637%3A0x6b1f2479f6580f5c!2sPietermaritzburg!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-primary p-8 rounded-2xl shadow-xl" data-aos="fade-left">
+                    <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Your Name</label>
+                                <input type="text" class="w-full bg-gray-50 dark:bg-secondary border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent dark:text-white transition" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Phone Number</label>
+                                <input type="tel" class="w-full bg-gray-50 dark:bg-secondary border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent dark:text-white transition" placeholder="082 123 4567" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 dark:bg-secondary border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent dark:text-white transition" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Service Needed</label>
+                            <select class="w-full bg-gray-50 dark:bg-secondary border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent dark:text-white transition">
+                                <option>General Plumbing</option>
+                                <option>Construction / Building</option>
+                                <option>Leak Detection</option>
+                                <option>Renovations</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Message</label>
+                            <textarea rows="4" class="w-full bg-gray-50 dark:bg-secondary border border-gray-200 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-accent dark:text-white transition" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent hover:bg-accentHover text-white font-bold py-4 rounded-lg transition transform hover:scale-[1.02] shadow-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary pt-16 pb-8 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1 -->
+                <div>
+                    <a href="#" class="text-2xl font-heading font-extrabold text-white flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-helmet-safety text-accent"></i>
+                        CJ <span class="text-accent">PLUMBERS</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Professional plumbing and construction services you can rely on. Quality workmanship, fair pricing, and 24/7 availability.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-accent transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-accent transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-accent transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-accent transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-accent transition">About Us</a></li>
+                        <li><a href="#services" class="hover:text-accent transition">Services</a></li>
+                        <li><a href="#projects" class="hover:text-accent transition">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-accent transition">Emergency Plumbing</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Leak Detection</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Construction</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Renovations</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Geyser Installation</a></li>
+                    </ul>
+                </div>
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-accent mt-1"></i>
+                            <span>1803 Mnkangala Area,<br>Sweetwaters, 3201</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-accent"></i>
+                            <span>+27 00 000 0000</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-accent"></i>
+                            <span>info@cjplumbers.co.za</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2023 CJ Plumbers and Construction. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <!-- WhatsApp -->
+    <a href="https://wa.me/27000000000" target="_blank" class="fixed bottom-20 md:bottom-6 right-6 z-50 bg-green-500 text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp text-2xl md:text-3xl"></i>
+    </a>
+    
+    <!-- Call Now (Mobile Only sticky) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-primary border-t border-gray-200 dark:border-gray-700 p-4 z-40 flex gap-2">
+        <a href="tel:+27000000000" class="flex-1 bg-accent text-white py-3 rounded-lg text-center font-bold shadow-md pulse-btn">
+            <i class="fa-solid fa-phone mr-2"></i> Call Now
+        </a>
+        <a href="#contact" class="flex-1 bg-gray-800 text-white py-3 rounded-lg text-center font-bold shadow-md">
+            Get Quote
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="fixed bottom-24 right-6 z-40 bg-primary text-white w-10 h-10 rounded-lg flex items-center justify-center shadow-lg transition opacity-0 invisible hover:bg-accent">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Library Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // Initialize AOS (Animations)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+
+        // Toggle Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Dark Mode Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        const html = document.documentElement;
+
+        function toggleTheme() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+                mobileThemeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+                mobileThemeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            mobileThemeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+
+        // FAQ Accordion
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                
+                // Toggle current
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
